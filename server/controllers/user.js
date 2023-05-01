@@ -30,8 +30,11 @@ const login = asyncHandler(async (req, res) => {
             mes: "Missing inputs",
         })
     }
+
+    //instant
     const response = await User.findOne({ email })
     if (response && (await response.isCorrectPassword(password))) {
+        //convert to plant object
         const { password, role, ...userData } = response.toObject()
         return res.status(200).json({
             success: true,
